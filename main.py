@@ -12,11 +12,11 @@ QUIT = 'EXIT'
 def main():
     """Calls the rest of the functions"""
     while True:
-       print (os.getcwd())
-       print (MENU)
+       print(os.getcwd())
+       print(MENU)
        command = acceptCommand()
        if command == QUIT:
-          print ('Работа программы завершена.')
+          print('Работа программы завершена.')
           break
        runCommand(command)
 
@@ -29,7 +29,7 @@ def acceptCommand():
         if number in [1, 2, 3, 4, 5, 6]:
             return number
         else:
-            print ('Ошибка! Выберите пункт меню снова:')
+            print('Ошибка! Выберите пункт меню снова:')
             return acceptCommand()
 
     except ValueError:
@@ -96,7 +96,7 @@ def runCommand(command):
 
     if command == 1:
         for numbers, folders, files in os.walk(path):
-            print ('Папки: ', end='')
+            print('Папки: ', end='')
             for folder in folders:
                 print (folder, end='  ')
             print()
@@ -124,9 +124,9 @@ def runCommand(command):
         target = input('Введите то название, которое хотите найти: ')
         files_with_target = findFiles(target, path)
         if files_with_target == []:
-            print ('Файлы с таким названием не найдены!')
+            print('Файлы с таким названием не найдены!')
         else:
-            print ('Пути к файлам, которые содержат данное название: ')
+            print('Пути к файлам, которые содержат данное название: ')
             for dirpath in files_with_target:
                 print(dirpath)
 
