@@ -75,6 +75,17 @@ def countBytes(path):
             quantity_bytes += os.path.getsize(os.path.join(path, name))
     return quantity_bytes
 
+def findFiles(target, path):
+    """Search for a given name in files """
+    list_path = []
+    for name in os.listdir(path):
+        if os.path.isdir(os.path.join(path, name)):
+            list_path += findFiles(target, os.path.join(path, name))
+        if os.path.isfile(os.path.join(path, name)):
+            if target in name:
+                list_path.append(os.path.join(path, name))
+    return list_path
+
 def runCommand(command):
     """Determination of the required function by the command number"""
     path = os.getcwd()
@@ -104,9 +115,17 @@ def runCommand(command):
         print('Количество каталогов:', count_fold_files(path) - countFiles(path))
 
     if command == 5:
-        print ('Суммарный объем (в байтах) всех файлов:', countBytes(path))
+        print('Суммарный объем (в байтах) всех файлов:', countBytes(path))
 
-
+    if command == 6:
+        target = input('Введите то название, которое хотите найти: ')
+        files_with_target = findFiles(target, path)
+        if files_with_target == []:
+            print ('Файлы с таким названием не найдены!')
+        else:
+            print ('Пути к файлам, которые содержат данное название: ')
+            for dirpath in files_with_target:
+                print(dirpath)
 
     print()
 
