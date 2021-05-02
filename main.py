@@ -1,4 +1,4 @@
-"""Case-study #8.2 Text generator
+"""Case-study #8_2
 Разработчики:
 Турчинович М. (), Зубарева Т. () , Костылев М. ()
 """
@@ -33,8 +33,46 @@ def acceptCommand():
         print ('Ошибка! Выберите пункт меню снова:')
         acceptCommand()
 
-def runCommand(command):
+def moveUp():
+    """
+    path = os.getcwd()
+    old_dir = os.chdir(path)
+    print(os.getcwd())"""
+    # Переход на уровень выше
+    os.chdir('..')
 
+def moveDown(currentDir):
+    if os.path.isdir(currentDir):
+        os.chdir(currentDir)
+    else:
+        currentDir = input('Ошибка! Введите новый каталог снова: ')
+        moveDown(currentDir)
+
+def runCommand(command):
+    """Determination of the required function by the command number"""
+    path = os.getcwd()
+    print()
+
+    if command == 1:
+        for numbers, folders, files in os.walk(path):
+            print ('Папки: ', end='')
+            for folder in folders:
+                print (folder, end='  ')
+            print()
+            print('Файлы: ', end='')
+            for file in files:
+                print(file, end='  ')
+            print()
+            break
+
+    if command == 2:
+        moveUp()
+
+    if command == 3:
+        currentDir = input('Введите нужный новый каталог: ')
+        moveDown(currentDir)
+
+    print()
 
 if __name__ == '__main__':
     main()
