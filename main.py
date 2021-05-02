@@ -1,10 +1,8 @@
 """Case-study #8_2
 Разработчики:
-Турчинович М. (), Зубарева Т. () , Костылев М. ()
+Турчинович М. (65%), Зубарева Т. (45%) , Костылев М. (20%)
 """
 import os
-
-#можно сделать отдельный файл с оодержанием всяких переменных
 
 MENU = '1. Просмотр каталога\n2. На уровень вверх\n3. На уровень вниз\n' \
        '4. Количество файлов и каталогов\n5. Размер текущего каталога (в байтах)\n' \
@@ -24,14 +22,19 @@ def main():
 
 def acceptCommand():
     """Checks the correctness of the entered number"""
-    number = int (input ())
-    if number == 7:
-        return 'EXIT'
-    if number in [1, 2, 3, 4, 5, 6]:
-        return number
-    else:
-        print ('Ошибка! Выберите пункт меню снова:')
-        acceptCommand()
+    try:
+        number = int (input ())
+        if number == 7:
+            return 'EXIT'
+        if number in [1, 2, 3, 4, 5, 6]:
+            return number
+        else:
+            print ('Ошибка! Выберите пункт меню снова:')
+            return acceptCommand()
+
+    except ValueError:
+        print('Ошибка! Выберите пункт меню снова:')
+        return acceptCommand()
 
 def moveUp():
     """Moving to a higher level"""
